@@ -237,7 +237,9 @@ a:focus-visible, .btn:focus-visible, button:focus-visible { outline: 3px solid r
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .form-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
 .form-actions .btn { min-width: 220px; }
-.form-actions .btn[disabled] { opacity: .65; cursor: progress; transform: none; }
+.form-actions .btn[disabled] { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.form-hint { font-size: 14px; color: var(--muted); }
+.consent a { color: var(--navy); font-weight: 600; }
 .form-status { padding: 14px 18px; border-radius: 14px; font-size: 15px; }
 .form-status.ok { background: var(--green-soft); color: #065F46; }
 .form-status.bad { background: var(--err-soft); color: var(--err); }

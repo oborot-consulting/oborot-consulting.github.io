@@ -205,7 +205,7 @@
       <div class="projects">
         <article class="project">
           <div class="project-id">
-            <span class="tag">Промышленное производство · металлообработка</span>
+            <span class="tag">Металлообработка</span>
             <h3 class="project-name">Производственное предприятие</h3>
           </div>
           <div class="project-problem">
@@ -222,7 +222,7 @@
 
         <article class="project">
           <div class="project-id">
-            <span class="tag">Промышленное производство · упаковка</span>
+            <span class="tag">Производство упаковки</span>
             <h3 class="project-name">Производитель упаковки</h3>
           </div>
           <div class="project-problem">
@@ -238,7 +238,7 @@
 
         <article class="project">
           <div class="project-id">
-            <span class="tag">Образование · дополнительное образование</span>
+            <span class="tag">Образование</span>
             <h3 class="project-name">Образовательный центр</h3>
           </div>
           <div class="project-problem">
@@ -343,9 +343,10 @@
         </div>
       </div>
       <div class="hp" aria-hidden="true"><label for="f-botcheck">Не заполняйте это поле</label><input id="f-botcheck" name="botcheck" type="checkbox" tabindex="-1"></div>
-      <label class="consent" for="f-consent"><input id="f-consent" name="consent" type="checkbox" required> Даю согласие на обработку персональных данных для ответа на заявку</label>
+      <label class="consent" for="f-consent"><input id="f-consent" name="consent" type="checkbox" required> <span>Я ознакомлен(а) с <a href="privacy.html" target="_blank" rel="noopener">Политикой обработки персональных данных</a> и даю согласие на обработку моих персональных данных</span></label>
       <div class="form-actions">
-        <button class="btn" type="submit" id="f-submit">Отправить заявку <span class="arr" aria-hidden="true">→</span></button>
+        <button class="btn" type="submit" id="f-submit" disabled>Отправить заявку <span class="arr" aria-hidden="true">→</span></button>
+        <span class="form-hint" id="f-hint">Отметьте согласие, чтобы отправить заявку</span>
       </div>
       <p class="form-status" id="f-status" role="status" aria-live="polite" hidden></p>
     </form>
@@ -355,7 +356,7 @@
 <footer class="site-foot">
   <div class="wrap">
     <span>© 2026 Оборот</span>
-    <span>Услуги не являются аудиторской деятельностью.</span>
+    <span><a href="privacy.html">Политика обработки персональных данных</a> · Услуги не являются аудиторской деятельностью.</span>
   </div>
 </footer>
 
@@ -368,6 +369,11 @@
     var statusEl = document.getElementById("f-status");
     var submitBtn = document.getElementById("f-submit");
     var fallback = "Проверьте подключение к интернету и попробуйте ещё раз.";
+    var consentBox = form.elements["consent"];
+    var hint = document.getElementById("f-hint");
+    function syncConsent() { submitBtn.disabled = !consentBox.checked; hint.hidden = consentBox.checked; }
+    consentBox.addEventListener("change", syncConsent);
+    syncConsent();
 
     function show(text, ok) {
       statusEl.textContent = text;
@@ -405,7 +411,7 @@
           else { show("Не удалось отправить заявку. " + fallback, false); }
         })
         .catch(function () { show("Не удалось отправить заявку. " + fallback, false); })
-        .then(function () { submitBtn.disabled = false; submitBtn.firstChild.nodeValue = "Отправить заявку "; });
+        .then(function () { submitBtn.firstChild.nodeValue = "Отправить заявку "; syncConsent(); });
     });
   })();
 </script>
